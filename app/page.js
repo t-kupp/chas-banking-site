@@ -1,83 +1,55 @@
+import { ThemeToggle } from "@/components/Header/ThemeToggle";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="grid min-h-screen grid-rows-[20px_1fr_20px] items-center justify-items-center gap-16 p-8 pb-20 font-[family-name:var(--font-geist-sans)] sm:p-20">
-      <main className="row-start-2 flex flex-col items-center gap-[32px] sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-center font-[family-name:var(--font-geist-mono)] text-sm/6 sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="rounded bg-black/[.05] px-1 py-0.5 font-[family-name:var(--font-geist-mono)] font-semibold dark:bg-white/[.06]">
-              app/page.js
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex flex-col items-center gap-4 sm:flex-row">
-          <a
-            className="bg-foreground text-background flex h-10 items-center justify-center gap-2 rounded-full border border-solid border-transparent px-4 text-sm font-medium transition-colors hover:bg-[#383838] sm:h-12 sm:w-auto sm:px-5 sm:text-base dark:hover:bg-[#ccc]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="flex h-10 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-4 text-sm font-medium transition-colors hover:border-transparent hover:bg-[#f2f2f2] sm:h-12 sm:w-auto sm:px-5 sm:text-base md:w-[158px] dark:border-white/[.145] dark:hover:bg-[#1a1a1a]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <div className="mx-auto flex max-w-lg flex-col items-center justify-center gap-8 px-4 lg:max-w-7xl lg:px-8">
+      {/* Hero Section  */}
+      <section className="flex h-full w-full max-w-2xl flex-col items-center justify-center p-8 text-center lg:py-64">
+        <h1 className="text-4xl font-bold sm:text-5xl">
+          Big Stacks Bank – Where Your Money Gets Taller
+        </h1>
+        <p className="text-muted-foreground mt-4 text-lg opacity-90">
+          Banking should be simple, secure, and profitable. At Big Stacks Bank, your money works
+          harder—so you don’t have to.
+        </p>
+        <div className="mt-6 flex justify-center gap-2">
+          <Button variant={"default"} size={"lg"}>
+            Login
+          </Button>
+          <Button variant={"outline"} size={"lg"}>
+            Create Account
+          </Button>
         </div>
-      </main>
-      <footer className="row-start-3 flex flex-wrap items-center justify-center gap-[24px]">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image aria-hidden src="/file.svg" alt="File icon" width={16} height={16} />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image aria-hidden src="/window.svg" alt="Window icon" width={16} height={16} />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image aria-hidden src="/globe.svg" alt="Globe icon" width={16} height={16} />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </section>
+
+      {/* Article Section  */}
+
+      <div className="grid max-w-5xl grid-cols-1 rounded-xl border lg:grid-cols-2">
+        <section className="flex w-full flex-col items-center justify-center p-8">
+          <h1 className="text-3xl font-bold sm:text-4xl">
+            How to Build a Budget That Actually Works
+          </h1>
+          <p className="text-muted-foreground mt-4 text-base opacity-90">
+            Creating a budget can feel overwhelming, but it doesn’t have to be. Discover
+            easy-to-follow steps to build a budget that works for you, and how to stick to it
+            without feeling restricted.
+          </p>
+
+          <Button variant={"outline"} className={"mt-6"} size={"lg"}>
+            Find out more
+          </Button>
+        </section>
+        <Image
+          width={1000}
+          height={400}
+          src={"/hero-1.png"}
+          className="h-full w-full rounded-tr-xl rounded-br-xl object-cover"
+          alt="Image of a dollar bill roll."
+        />
+      </div>
     </div>
   );
 }
