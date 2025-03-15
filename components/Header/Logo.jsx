@@ -1,7 +1,7 @@
 export default function Logo() {
   return (
     <div>
-      <svg className="h-full w-48" viewBox="0 0 370 50.00000000000001">
+      <svg className="mr-4 h-full w-48" viewBox="0 0 370 50.00000000000001">
         <defs id="SvgjsDefs3960">
           <linearGradient id="SvgjsLinearGradient3965">
             <stop id="SvgjsStop3966" stopColor="#2d388a" offset="0"></stop>
