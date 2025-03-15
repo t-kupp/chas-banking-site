@@ -6,14 +6,14 @@ import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
 
 export const metadata = {
-  title: "BigStacks Inc.",
+  title: "Big Stacks Bank",
   description: "Banking made simple.",
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${GeistSans.className} antialiased`}>
+      <body className={`${GeistSans.className} flex min-h-screen flex-col antialiased`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

@@ -1,13 +1,15 @@
+import ArticleCard from "@/components/ArticleCard";
 import { ThemeToggle } from "@/components/Header/ThemeToggle";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="mx-auto flex max-w-lg flex-col items-center justify-center gap-8 px-4 lg:max-w-7xl lg:px-8">
+    <div className="mx-auto flex max-w-lg flex-col items-center justify-center px-4 lg:max-w-7xl lg:px-8">
       {/* Hero Section  */}
-      <section className="flex h-full w-full max-w-2xl flex-col items-center justify-center p-8 text-center lg:py-64">
+      {/* <section className="flex h-full w-full max-w-2xl flex-col items-center justify-center p-8 text-center lg:py-32">
         <h1 className="text-4xl font-bold sm:text-5xl">
           Big Stacks Bank – Where Your Money Gets Taller
         </h1>
@@ -17,18 +19,15 @@ export default function Home() {
         </p>
         <div className="mt-6 flex justify-center gap-2">
           <Button variant={"default"} size={"lg"}>
-            Login
-          </Button>
-          <Button variant={"outline"} size={"lg"}>
-            Create Account
+            Get started <ArrowRight />
           </Button>
         </div>
-      </section>
+      </section> */}
 
       {/* Article Section  */}
 
-      <div className="grid max-w-5xl grid-cols-1 rounded-xl border lg:grid-cols-2">
-        <section className="flex w-full flex-col items-center justify-center p-8">
+      <section className="grid max-w-5xl grid-cols-1 gap-4 lg:my-16 lg:grid-cols-2">
+        <div className="flex w-full flex-col items-center justify-center">
           <h1 className="text-3xl font-bold sm:text-4xl">
             How to Build a Budget That Actually Works
           </h1>
@@ -38,18 +37,54 @@ export default function Home() {
             without feeling restricted.
           </p>
 
-          <Button variant={"outline"} className={"mt-6"} size={"lg"}>
-            Find out more
+          <Button variant={"outline"} className={"mt-6 self-start"} size={"lg"}>
+            Start budgeting
           </Button>
-        </section>
+        </div>
         <Image
           width={1000}
           height={400}
           src={"/hero-1.png"}
-          className="h-full w-full rounded-tr-xl rounded-br-xl object-cover"
+          className="h-full w-full object-cover"
           alt="Image of a dollar bill roll."
         />
-      </div>
+      </section>
+
+      <section className="mb-16 grid w-full grid-cols-2 gap-8 lg:grid-cols-5">
+        <Button className={"w-full"} variant={"secondary"} size={"lg"}>
+          Market Trends <ArrowRight className="ml-auto" />
+        </Button>
+        <Button className={"w-full"} variant={"secondary"} size={"lg"}>
+          Investment News <ArrowRight className="ml-auto" />
+        </Button>
+        <Button className={"w-full"} variant={"secondary"} size={"lg"}>
+          Earnings Reports <ArrowRight className="ml-auto" />
+        </Button>
+        <Button className={"w-full"} variant={"secondary"} size={"lg"}>
+          Mortgage <ArrowRight className="ml-auto" />
+        </Button>
+        <Button className={"w-full"} variant={"secondary"} size={"lg"}>
+          Get Mobile BankID <ArrowRight className="ml-auto" />
+        </Button>
+      </section>
+
+      <section className="mb-16 grid grid-cols-1 gap-8 lg:grid-cols-3">
+        <ArticleCard
+          title={"How to improve your money mindset"}
+          imageSource={"/article-1.png"}
+          linkText={"Make better choices"}
+        />
+        <ArticleCard
+          title={"Should I pay down debt, save or invest?"}
+          imageSource={"/article-2.png"}
+          linkText={"Help me decide"}
+        />
+        <ArticleCard
+          title={"Top 5 reasons to refinance"}
+          imageSource={"/article-3.png"}
+          linkText={"Pros and cons"}
+        />
+      </section>
     </div>
   );
 }

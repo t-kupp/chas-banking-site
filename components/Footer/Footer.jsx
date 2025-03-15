@@ -2,7 +2,7 @@ import { Button } from "../ui/button";
 
 export default function Footer() {
   return (
-    <div className="bg-muted mt-24 border-t py-18">
+    <div className="bg-muted mt-auto border-t py-8">
       <div className="mx-auto flex max-w-5xl">
         <div className="grid w-full grid-cols-1 justify-items-start lg:grid-cols-3">
           <Button variant={"link"}>Support</Button>
