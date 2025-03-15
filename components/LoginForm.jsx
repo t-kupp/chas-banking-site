@@ -3,7 +3,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -16,18 +15,34 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
-import { Separator } from "@/components/ui/separator";
+import { useEffect, useState } from "react";
 
 const formSchema = z.object({
-  username: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
+  username: z.string().min(3, {
+    message: "Username must be at least 3 characters.",
   }),
   password: z.string().min(5, {
     message: "Password must be at least 5 characters.",
   }),
 });
 
-export default function LoginForm({ handleSubmit }) {
+export default function LoginForm({ handleSubmit, response }) {
+  const [errorMessage, setErrorMessage] = useState("");
+
+  useEffect(() => {
+    if (response) {
+      if (response.status === 201) {
+        setErrorMessage("");
+        console.log("Account successfully created!\nTodo: Forwarding to /account");
+      }
+
+      if (response.status === 400) {
+        setErrorMessage("User already exists. Please try a different username.");
+        form.reset();
+      }
+    }
+  }, [response]);
+
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -56,9 +71,14 @@ export default function LoginForm({ handleSubmit }) {
                 <FormItem>
                   <FormLabel>Username</FormLabel>
                   <FormControl>
-                    <Input placeholder="Enter your username" {...field} />
+                    <Input
+                      onFocus={() => setErrorMessage("")}
+                      placeholder="Enter your username"
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
+                  {errorMessage && <p className="text-sm text-red-500">{errorMessage}</p>}
                 </FormItem>
               )}
             />
