@@ -29,15 +29,18 @@ const formSchema = z.object({
 
 export default function LoginForm({ handleSubmit, response }) {
   const [loginLoading, setLoginLoading] = useState(false);
+  const [showErrorMessage, setShowErrorMessage] = useState(false);
 
   useEffect(() => {
     if (response) {
       setLoginLoading(false);
 
       if (response.status === 201) {
+        alert("Account successfully created!");
       }
 
-      if (response.status === 400) {
+      if (response.status === 401) {
+        setShowErrorMessage(true);
       }
     }
   }, [response]);
@@ -88,6 +91,11 @@ export default function LoginForm({ handleSubmit, response }) {
                     <Input type="password" placeholder="Enter your password" {...field} />
                   </FormControl>
                   <FormMessage />
+                  {showErrorMessage && (
+                    <p className="text-sm text-red-500 dark:text-red-900">
+                      Incorrect username or password. Please try again.
+                    </p>
+                  )}
                 </FormItem>
               )}
             />

@@ -2,28 +2,34 @@
 
 import LoginForm from "@/components/LoginForm";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
-const BASE_URL = "http://localhost:3000/";
-// const BASE_URL = "http://13.60.105.124:3000/";
+// const BASE_URL = "http://localhost:3000/";
+const BASE_URL = "http://13.60.105.124:3000/";
 
 export default function Login() {
   const [response, setResponse] = useState(null);
+  const router = useRouter();
 
   function handleSubmit(data) {
-    if (data.action === "register") {
-      const { username, password } = data;
-      addUser({ username, password });
-    }
+    const { username, password } = data;
+    loginUser({ username, password });
   }
 
-  async function addUser(user) {
+  async function loginUser(data) {
     const res = await fetch(`${BASE_URL}/api/login`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(user),
+      header: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
     });
 
     setResponse(res);
+
+    const result = await res.json();
+
+    if (result.redirectUrl) {
+      router.push(result.redirectUrl);
+    }
   }
 
   return (

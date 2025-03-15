@@ -1,12 +1,9 @@
-let users = [{ id: 101, username: "Jan", password: "test" }];
-let accounts = [{ id: 1, userId: 101, amount: 500 }];
-let sessions = [];
+import { NextResponse } from "next/server";
+
+export let users = [{ id: 101, username: "jan", password: "test123" }];
+export let accounts = [{ id: 1, userId: 101, amount: 500 }];
 
 const randomString = () => crypto.randomUUID();
-
-export async function GET(req) {
-  return new Response("GET");
-}
 
 export async function POST(req) {
   const data = await req.json();
@@ -18,7 +15,10 @@ export async function POST(req) {
   );
   if (userExists) {
     console.log("User already exists, account not created!");
-    return new Response({ message: "User already exists, account not created!" }, { status: 400 });
+    return NextResponse.json(
+      { message: "User already exists, account not created!" },
+      { status: 400 },
+    );
   }
 
   users.push(newUser);
@@ -28,5 +28,5 @@ export async function POST(req) {
   accounts.push(newAccount);
   console.log("New account added:", newAccount);
 
-  return new Response({ message: "New user added" }, { status: 201 });
+  return NextResponse.json({ message: "New user added" }, { status: 201 });
 }
