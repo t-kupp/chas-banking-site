@@ -19,7 +19,7 @@ export default function ArticleCard({ title, imageSource, linkText }) {
           <Button
             variant={"link"}
             className={
-              "text-foreground mt-auto gap-1 self-start !p-0 text-base font-normal group-hover:underline"
+              "text-foreground mt-auto gap-1 self-start !p-0 font-normal group-hover:underline"
             }
           >
             {linkText} <ArrowRight className="transition-[margin] duration-200 group-hover:ml-1" />

@@ -26,9 +26,11 @@ export default function Header() {
           <Search /> Search
         </Button>
 
-        <Button className={"ml-4"}>
-          <Lock /> Login
-        </Button>
+        <Link href={"/login"}>
+          <Button className={"ml-4"}>
+            <Lock /> Login
+          </Button>
+        </Link>
       </div>
     </div>
   );
