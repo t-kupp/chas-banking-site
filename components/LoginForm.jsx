@@ -16,6 +16,7 @@ import {
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { LoaderCircle } from "lucide-react";
 
 const formSchema = z.object({
   username: z.string().min(3, {
@@ -28,17 +29,22 @@ const formSchema = z.object({
 
 export default function LoginForm({ handleSubmit, response }) {
   const [errorMessage, setErrorMessage] = useState("");
+  const [loginLoading, setLoginLoading] = useState(false);
+  const [registerLoading, setRegisterLoading] = useState(false);
 
   useEffect(() => {
     if (response) {
+      setLoginLoading(false);
+      setRegisterLoading(false);
+
       if (response.status === 201) {
         setErrorMessage("");
+        alert("Account successfully created!");
         console.log("Account successfully created!\nTodo: Forwarding to /account");
       }
 
       if (response.status === 400) {
         setErrorMessage("User already exists. Please try a different username.");
-        form.reset();
       }
     }
   }, [response]);
@@ -52,6 +58,9 @@ export default function LoginForm({ handleSubmit, response }) {
   });
 
   function onSubmit(values, action) {
+    if (action === "login") setLoginLoading(true);
+    if (action === "register") setRegisterLoading(true);
+
     handleSubmit({ ...values, action });
   }
 
@@ -100,7 +109,13 @@ export default function LoginForm({ handleSubmit, response }) {
               className={"w-full"}
               onClick={form.handleSubmit((values) => onSubmit(values, "login"))}
             >
-              Sign In
+              {loginLoading ? (
+                <span className="animate-spin">
+                  <LoaderCircle />
+                </span>
+              ) : (
+                "Sign In"
+              )}
             </Button>
             <div className="relative w-full">
               <div className="absolute inset-0 flex items-center">

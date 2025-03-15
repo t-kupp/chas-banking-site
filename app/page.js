@@ -7,7 +7,7 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="mx-auto flex max-w-lg flex-col items-center justify-center px-4 lg:max-w-7xl lg:px-8">
+    <div className="mx-auto flex max-w-lg flex-col items-center justify-center px-4 py-16 md:max-w-2xl lg:max-w-5xl lg:px-8">
       {/* Hero Section  */}
       {/* <section className="flex h-full w-full max-w-2xl flex-col items-center justify-center p-8 text-center lg:py-32">
         <h1 className="text-4xl font-bold sm:text-5xl">
@@ -26,7 +26,7 @@ export default function Home() {
 
       {/* Article Section  */}
 
-      <section className="grid max-w-5xl grid-cols-1 gap-4 lg:my-16 lg:grid-cols-2">
+      <section className="mb-16 grid max-w-5xl grid-cols-1 gap-8 lg:my-16 lg:grid-cols-2">
         <div className="flex w-full flex-col items-center justify-center">
           <h1 className="text-3xl font-bold sm:text-4xl">
             How to Build a Budget That Actually Works
@@ -45,12 +45,12 @@ export default function Home() {
           width={1000}
           height={400}
           src={"/hero-1.png"}
-          className="h-full w-full object-cover"
+          className="h-full w-full rounded-lg object-cover"
           alt="Image of a dollar bill roll."
         />
       </section>
 
-      <section className="mb-16 grid w-full grid-cols-2 gap-8 lg:grid-cols-5">
+      <section className="mb-16 grid w-full grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
         <Button className={"w-full"} variant={"secondary"} size={"lg"}>
           Market Trends <ArrowRight className="ml-auto" />
         </Button>
@@ -68,7 +68,7 @@ export default function Home() {
         </Button>
       </section>
 
-      <section className="mb-16 grid grid-cols-1 gap-8 lg:grid-cols-3">
+      <section className="mb-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
         <ArticleCard
           title={"How to improve your money mindset"}
           imageSource={"/article-1.png"}

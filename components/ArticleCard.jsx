@@ -6,9 +6,9 @@ import { ArrowRight } from "lucide-react";
 export default function ArticleCard({ title, imageSource, linkText }) {
   return (
     <Link href={"/"}>
-      <div className="group flex h-full max-w-xs flex-col rounded-xl border">
+      <div className="group flex h-full flex-col rounded-lg border">
         <Image
-          className="max-h-64 rounded-tl-xl rounded-tr-xl object-cover"
+          className="max-h-64 rounded-tl-lg rounded-tr-lg object-cover"
           src={imageSource}
           alt={"Image"}
           width={400}
