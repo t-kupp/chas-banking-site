@@ -3,8 +3,8 @@
 import LoginForm from "@/components/LoginForm";
 import { useState } from "react";
 
-// const BASE_URL = "http://localhost:3000/";
-const BASE_URL = "http://13.60.105.124:3000/";
+const BASE_URL = "http://localhost:3000/";
+// const BASE_URL = "http://13.60.105.124:3000/";
 
 export default function Login() {
   const [response, setResponse] = useState(null);
