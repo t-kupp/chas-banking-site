@@ -27,17 +27,20 @@ const formSchema = z.object({
   }),
 });
 
-export default function LoginForm({ handleSubmit, response }) {
+export default function RegisterForm({ handleSubmit, response }) {
   const [loginLoading, setLoginLoading] = useState(false);
+  const [showErrorMessage, setShowErrorMessage] = useState(false);
 
   useEffect(() => {
     if (response) {
       setLoginLoading(false);
 
       if (response.status === 201) {
+        alert("Account successfully created!");
       }
 
       if (response.status === 400) {
+        setShowErrorMessage(true);
       }
     }
   }, [response]);
@@ -59,8 +62,8 @@ export default function LoginForm({ handleSubmit, response }) {
   return (
     <>
       <div className="mb-6 w-full text-center">
-        <h1 className="mb-2 text-3xl font-medium">Welcome Back!</h1>
-        <p className="text-muted-foreground">Let’s get you signed in and back to stacking.</p>
+        <h1 className="mb-2 text-3xl font-medium">Welcome to Big Stacks!</h1>
+        <p className="text-muted-foreground">Sign up and start stacking big today.</p>
       </div>
       <div className="mb-2 w-full">
         <Form {...form}>
@@ -72,9 +75,18 @@ export default function LoginForm({ handleSubmit, response }) {
                 <FormItem>
                   <FormLabel>Username</FormLabel>
                   <FormControl>
-                    <Input placeholder="Enter your username" {...field} />
+                    <Input
+                      onFocus={() => setShowErrorMessage(false)}
+                      placeholder="Enter your username"
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
+                  {showErrorMessage && (
+                    <p className="text-sm text-red-500 dark:text-red-900">
+                      Username already taken, please choose a different name.
+                    </p>
+                  )}
                 </FormItem>
               )}
             />
@@ -101,22 +113,9 @@ export default function LoginForm({ handleSubmit, response }) {
                   <LoaderCircle />
                 </span>
               ) : (
-                "Sign In"
+                "Create Account"
               )}
             </Button>
-            <div className="relative w-full">
-              <div className="absolute inset-0 flex items-center">
-                <span className="w-full border-t"></span>
-              </div>
-              <div className="relative flex justify-center text-xs uppercase">
-                <span className="bg-background text-muted-foreground px-2">Or continue with</span>
-              </div>
-            </div>
-            <Link href={"/register"}>
-              <Button type="button" variant={"secondary"} className="w-full text-sm">
-                Create an Account
-              </Button>
-            </Link>
           </form>
         </Form>
       </div>

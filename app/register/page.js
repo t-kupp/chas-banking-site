@@ -1,23 +1,21 @@
 "use client";
 
-import LoginForm from "@/components/LoginForm";
+import RegisterForm from "@/components/RegisterForm";
 import { useState } from "react";
 
 // const BASE_URL = "http://localhost:3000/";
 const BASE_URL = "http://13.60.105.124:3000/";
 
-export default function Login() {
+export default function Register() {
   const [response, setResponse] = useState(null);
 
   function handleSubmit(data) {
-    if (data.action === "register") {
-      const { username, password } = data;
-      addUser({ username, password });
-    }
+    const { username, password } = data;
+    addUser({ username, password });
   }
 
   async function addUser(user) {
-    const res = await fetch(`${BASE_URL}/api/login`, {
+    const res = await fetch(`${BASE_URL}/api/register`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(user),
@@ -28,7 +26,7 @@ export default function Login() {
 
   return (
     <div className="m-auto flex w-full max-w-md flex-col items-center px-4 py-16">
-      <LoginForm handleSubmit={handleSubmit} response={response} />
+      <RegisterForm handleSubmit={handleSubmit} response={response} />
     </div>
   );
 }
