@@ -24,11 +24,13 @@ export default function Login() {
     });
 
     setResponse(res);
-
     const result = await res.json();
 
-    if (result.redirectUrl) {
-      router.push(result.redirectUrl);
+    console.log(result);
+
+    if (res.status === 201) {
+      localStorage.setItem("session", JSON.stringify(result.session));
+      router.push("/account");
     }
   }
 

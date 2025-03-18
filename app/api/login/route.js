@@ -1,7 +1,7 @@
 import { users } from "../../../app/api/register/route.js";
 import { NextResponse } from "next/server";
 
-let sessions = [];
+export let sessions = [];
 
 const randomString = () => crypto.randomUUID();
 
@@ -15,7 +15,12 @@ export async function POST(req) {
   }
 
   const sessionToken = randomString();
-  sessions.push({ userId: user.id, token: sessionToken });
 
-  return NextResponse.json({ redirectUrl: "/account" });
+  const newSession = { userId: user.id, token: sessionToken };
+
+  sessions.push(newSession);
+  console.log("New session added:", newSession);
+  console.log("Current sessions:", sessions);
+
+  return NextResponse.json({ message: "Session added.", session: newSession }, { status: 201 });
 }

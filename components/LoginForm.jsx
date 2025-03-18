@@ -17,6 +17,7 @@ import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { LoaderCircle } from "lucide-react";
+import { redirect } from "next/navigation";
 
 const formSchema = z.object({
   username: z.string().min(3, {
@@ -36,7 +37,7 @@ export default function LoginForm({ handleSubmit, response }) {
       setLoginLoading(false);
 
       if (response.status === 201) {
-        alert("Account successfully created!");
+        console.log("Login succesfull");
       }
 
       if (response.status === 401) {
