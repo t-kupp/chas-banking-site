@@ -2,9 +2,7 @@
 
 import RegisterForm from "@/components/RegisterForm";
 import { useState } from "react";
-
-const BASE_URL = "http://localhost:3000/";
-// const BASE_URL = "http://13.60.105.124:3000/";
+import { BASE_URL } from "@/lib/baseUrl";
 
 export default function Register() {
   const [response, setResponse] = useState(null);

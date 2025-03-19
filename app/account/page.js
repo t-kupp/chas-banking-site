@@ -1,28 +1,29 @@
 "use client";
 
+import Dashboard from "@/components/Account/Dashboard";
 import { Button } from "@/components/ui/button";
+import { Loader2 } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-
-const BASE_URL = "http://localhost:3000/";
-// const BASE_URL = "http://13.60.105.124:3000/";
+import { BASE_URL } from "@/lib/baseUrl";
 
 export default function Account() {
-  const [user, setUser] = useState({});
-  const [isSessionValid, setIsSessionValid] = useState(true);
+  const [user, setUser] = useState(null);
+  const [isSessionValid, setIsSessionValid] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    getUserInfo();
+    getUserData();
     console.log("userinfo called");
   }, []);
 
-  async function getUserInfo() {
-    const session = localStorage.getItem("session");
+  async function getUserData() {
+    const session = JSON.parse(localStorage.getItem("session"));
 
     const res = await fetch(`${BASE_URL}/api/account`, {
       method: "POST",
-      headers: { "Content-Type": "application/json", session: session },
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ action: "getUserData", session: session }),
     });
 
     const answer = await res.json();
@@ -41,29 +42,27 @@ export default function Account() {
     setIsLoading(false);
   }
 
-  if (isLoading) {
-    return <p>Loading...</p>;
-  }
-
   return (
-    <div className="">
-      {!isSessionValid ? (
-        <p className="">
-          Oops! You're not signed in. Please go to the{" "}
-          <Link href={"/login"}>
-            <Button variant={"link"} className={"p-0 text-base"}>
-              login page
-            </Button>
-          </Link>{" "}
-          to access your account.
-        </p>
-      ) : (
-        <div>Hello! Your balance is ${user.amount}.</div>
-      )}
+    <div className="mx-auto flex h-screen w-full max-w-7xl p-8">
+      <div
+        className={`${!isLoading && "border"} my-auto flex w-full flex-col items-center justify-center rounded-xl p-8`}
+      >
+        {isLoading ? (
+          <Loader2 className="animate-spin" />
+        ) : !isSessionValid ? (
+          <p className="">
+            Oops! You're not signed in. Please go to the{" "}
+            <Link href={"/login"}>
+              <Button variant={"link"} className={"p-0 text-base"}>
+                login page
+              </Button>
+            </Link>{" "}
+            to access your account.
+          </p>
+        ) : (
+          <Dashboard user={user} />
+        )}
+      </div>
     </div>
   );
 }
-
-// TODO
-// Send session to frontend
-// finish getUserInfo()
