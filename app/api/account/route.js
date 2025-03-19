@@ -2,15 +2,14 @@ import { NextResponse } from "next/server";
 import query from "@/lib/database";
 
 export async function POST(req) {
-  const sessionHeader = req.headers.get("session");
+  const sessionHeader = JSON.parse(req.headers.get("session"));
+  console.log("sessionHeader:", sessionHeader);
 
   if (!sessionHeader) {
     return NextResponse.json({ message: "Missing session." }, { status: 401 });
   }
 
-  const { userId, token } = JSON.parse(sessionHeader);
-
-  console.log(userId, token);
+  const { userId, token } = sessionHeader;
 
   // Check token validity
   const tokenQuery = await query(

@@ -1,1 +1,2 @@
 - Make passwords hashed instead of cleartext
+- Add/remove console.logs (cleanup)
