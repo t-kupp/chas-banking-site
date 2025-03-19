@@ -43,15 +43,16 @@ export default function Account() {
   }
 
   return (
-    <div className="mx-auto flex h-screen w-full max-w-7xl p-8">
+    <div className="flex h-screen w-full p-8">
       <div
-        className={`${!isLoading && "border"} my-auto flex w-full flex-col items-center justify-center rounded-xl p-8`}
+        className={`${!isLoading && "border"} mx-auto my-auto flex w-full max-w-7xl flex-col items-center justify-center rounded-xl p-8`}
       >
         {isLoading ? (
           <Loader2 className="animate-spin" />
         ) : !isSessionValid ? (
           <p className="">
-            Oops! You're not signed in. Please go to the{" "}
+            Oops! You are not signed in or token authentication failed. <br />
+            Please go to the{" "}
             <Link href={"/login"}>
               <Button variant={"link"} className={"p-0 text-base"}>
                 login page

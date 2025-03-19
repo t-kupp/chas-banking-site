@@ -4,11 +4,13 @@ import { Input } from "../../ui/input";
 import { Button } from "../../ui/button";
 import { useState } from "react";
 import { BASE_URL } from "@/lib/baseUrl";
+import { useRouter } from "next/navigation";
 
 export default function DepositCard({ updateBalance }) {
   const [amount, setAmount] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [showCheckmark, setShowCheckmark] = useState(false);
+  const router = useRouter();
 
   function handleKeyDown(e) {
     if (e.key == "." || e.key == "+" || e.key == "-") e.preventDefault();
@@ -50,8 +52,7 @@ export default function DepositCard({ updateBalance }) {
       }, 1000);
     } else {
       console.log(answer);
-
-      setIsLoading(false);
+      window.location.reload();
     }
   }
 
@@ -63,13 +64,13 @@ export default function DepositCard({ updateBalance }) {
       </CardHeader>
       <CardContent className={"flex gap-4"}>
         <div className="relative flex items-center">
-          <p className="text-muted-foreground absolute left-3">$</p>
+          <p className="text-muted-foreground absolute right-3">kr</p>
           <Input
             min="0"
             value={amount}
             onKeyDown={handleKeyDown}
             onChange={handleChange}
-            className={"pl-7"}
+            className={"pr-8"}
             type={"number"}
           />
         </div>

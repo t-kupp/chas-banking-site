@@ -8,8 +8,15 @@ export default function BalanceCard({ balance }) {
         <CardDescription>Total funds currently in your account.</CardDescription>
       </CardHeader>
       <CardContent>
-        <p className="text-2xl font-bold">${balance}.00</p>
+        <p className="text-2xl font-bold">{formatToUSD(balance)}</p>
       </CardContent>
     </Card>
   );
+}
+
+function formatToUSD(amount) {
+  return new Intl.NumberFormat("sv-SE", {
+    style: "currency",
+    currency: "SEK",
+  }).format(amount);
 }
