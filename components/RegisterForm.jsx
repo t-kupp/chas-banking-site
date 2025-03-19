@@ -17,6 +17,7 @@ import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { LoaderCircle } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   username: z.string().min(3, {
@@ -30,6 +31,7 @@ const formSchema = z.object({
 export default function RegisterForm({ handleSubmit, response }) {
   const [loginLoading, setLoginLoading] = useState(false);
   const [showErrorMessage, setShowErrorMessage] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     if (response) {
@@ -37,6 +39,7 @@ export default function RegisterForm({ handleSubmit, response }) {
 
       if (response.status === 201) {
         alert("Account successfully created!");
+        router.push("/login");
       }
 
       if (response.status === 400) {

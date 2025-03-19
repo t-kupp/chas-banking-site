@@ -4,8 +4,8 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-// const BASE_URL = "http://localhost:3000/";
-const BASE_URL = "http://13.60.105.124:3000/";
+const BASE_URL = "http://localhost:3000/";
+// const BASE_URL = "http://13.60.105.124:3000/";
 
 export default function Account() {
   const [user, setUser] = useState({});
@@ -31,7 +31,6 @@ export default function Account() {
 
     if (res.status != 200) {
       setIsSessionValid(false);
-      console.log("Invalid session token.");
     }
 
     if (res.status == 200) {
@@ -42,11 +41,22 @@ export default function Account() {
     setIsLoading(false);
   }
 
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
   return (
     <div className="">
-      {isLoading && <p>Loading...</p>}
-      {!isLoading && !isSessionValid ? (
-        <p className="">Invalid session.</p>
+      {!isSessionValid ? (
+        <p className="">
+          Oops! You're not signed in. Please go to the{" "}
+          <Link href={"/login"}>
+            <Button variant={"link"} className={"p-0 text-base"}>
+              login page
+            </Button>
+          </Link>{" "}
+          to access your account.
+        </p>
       ) : (
         <div>Hello! Your balance is ${user.amount}.</div>
       )}
@@ -55,5 +65,5 @@ export default function Account() {
 }
 
 // TODO
-// Send token to frontend
+// Send session to frontend
 // finish getUserInfo()

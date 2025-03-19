@@ -1,49 +1,41 @@
 import { NextResponse } from "next/server";
-import { sessions } from "../login/route";
-import { accounts } from "../register/route";
+import query from "@/lib/database";
 
 export async function POST(req) {
-  // Check access token
   const sessionHeader = req.headers.get("session");
 
   if (!sessionHeader) {
-    return NextResponse.json({ message: "Missing session token." }, { status: 400 });
+    return NextResponse.json({ message: "Missing session." }, { status: 401 });
   }
 
-  let storedSession;
-  try {
-    storedSession = JSON.parse(sessionHeader);
-  } catch (error) {
-    return NextResponse.json({ message: "Invalid session token format." }, { status: 400 });
-  }
+  const { userId, token } = JSON.parse(sessionHeader);
 
-  console.log("storedSession:", storedSession);
-  console.log("Current sessions:", sessions);
+  console.log(userId, token);
 
-  // Ensure sessions exist before checking
-  if (!Array.isArray(sessions)) {
-    return NextResponse.json({ message: "Session storage error." }, { status: 500 });
-  }
-
-  const sessionExists = sessions.some(
-    (session) => storedSession.token === session.token && storedSession.userId === session.userId,
+  // Check token validity
+  const tokenQuery = await query(
+    "SELECT userId, token FROM sessions WHERE userId = ? AND token = ?",
+    [userId, token],
   );
 
-  console.log("Session found?", sessionExists);
-
-  if (!sessionExists) {
-    return NextResponse.json({ message: "Session not found." }, { status: 401 });
+  if (tokenQuery.length == 0) {
+    return NextResponse.json({ message: "Invalid session." }, { status: 401 });
   }
 
   // Get user info
-  const userId = storedSession.userId;
-  const user = accounts.find((account) => account.userId === userId);
+  let username = null;
+  let amount = null;
 
-  if (!user) {
-    return NextResponse.json({ message: "User not found." }, { status: 404 });
+  try {
+    const userQuery = await query("SELECT username FROM users WHERE id = ?", [userId]);
+    username = userQuery[0].username;
+
+    const accountQuery = await query("SELECT amount FROM accounts WHERE userId = ?", [userId]);
+    amount = accountQuery[0].amount;
+  } catch (error) {
+    console.error(error);
   }
 
-  console.log("Sending user info:", user);
-
-  return NextResponse.json({ message: "Got userinfo.", user }, { status: 200 });
+  const user = { username, amount };
+  return NextResponse.json({ message: "Got userinfo.", user: user }, { status: 200 });
 }
