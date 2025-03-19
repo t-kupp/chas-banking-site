@@ -1,6 +1,7 @@
-import { Search, User, UserRound } from "lucide-react";
+import { Search, User } from "lucide-react";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
+import { ThemeToggle } from "../Header/ThemeToggle";
 
 export default function DashboardHeader({ user }) {
   return (
@@ -16,6 +17,7 @@ export default function DashboardHeader({ user }) {
           <Input placeholder="Search" className={"pr-8"} />
           <Search size={20} className="text-muted-foreground absolute top-2 right-2" />
         </div>
+        <ThemeToggle />
         <Button variant={"outline"} size={"icon"}>
           <User className="!h-6 !w-6" />
         </Button>
