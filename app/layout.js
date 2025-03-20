@@ -13,29 +13,6 @@ import { usePathname } from "next/navigation";
 // };
 
 export default function RootLayout({ children }) {
-  // Hack to exclude <Footer/> and <Header/> from /account
-  // Need to find a better way
-
-  const pathname = usePathname();
-  const noLayoutPages = ["/account"];
-
-  if (noLayoutPages.includes(pathname)) {
-    return (
-      <html lang="en" suppressHydrationWarning>
-        <body className={`${GeistSans.className} flex min-h-screen flex-col antialiased`}>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            {children}
-          </ThemeProvider>
-        </body>
-      </html>
-    );
-  }
-
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${GeistSans.className} flex min-h-screen flex-col antialiased`}>

@@ -43,7 +43,7 @@ export default function Account() {
   }
 
   return (
-    <div className="flex h-screen w-full p-8">
+    <div className="my-auto flex w-full p-8">
       <div
         className={`${!isLoading && "border"} mx-auto my-auto flex w-full max-w-7xl flex-col items-center justify-center rounded-xl p-8`}
       >

@@ -2,6 +2,7 @@ import { Search, User } from "lucide-react";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { ThemeToggle } from "../Header/ThemeToggle";
+import capitalize from "@/lib/capitalize";
 
 export default function DashboardHeader({ user }) {
   return (
@@ -24,8 +25,4 @@ export default function DashboardHeader({ user }) {
       </div>
     </div>
   );
-}
-
-function capitalize(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1);
 }
