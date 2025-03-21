@@ -66,6 +66,36 @@ export async function POST(req) {
     return NextResponse.json({ message: "Added funds. New balance:", newBalance }, { status: 200 });
   }
 
+  // Action: Transfer funds
+  else if (action == "transferFunds") {
+    if (amount <= 0) {
+      return NextResponse.json({ message: "Can't transfer negative funds!" }, { status: 400 });
+    }
+
+    const accountQuery = await query("UPDATE accounts SET amount = amount - ? WHERE userId = ?", [
+      amount,
+      userId,
+    ]);
+
+    const accountIdQuery = await query("SELECT id FROM accounts WHERE userId = ?", [userId]);
+    const accountId = accountIdQuery[0].id;
+
+    const transactionQuery = await query(
+      "INSERT INTO transactions (accountId, amount, transactionType, fromAccountId, toAccountId) VALUES (?, ?, ?, ?, ?)",
+      [accountId, amount, "withdrawal", null, accountId],
+    );
+
+    const amountQuery = await query("SELECT amount FROM accounts WHERE userId = ?", [userId]);
+
+    const newBalance = amountQuery[0].amount;
+    console.log("newBalance", newBalance);
+
+    return NextResponse.json(
+      { message: "Withdrew funds. New balance:", newBalance },
+      { status: 200 },
+    );
+  }
+
   // Action: Get transactions
   else if (action == "getTransactions") {
     let transactions = null;

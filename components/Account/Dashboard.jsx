@@ -19,9 +19,9 @@ export default function Dashboard({ user }) {
       <div className="grid grid-cols-3 grid-rows-[auto,auto,auto] gap-8">
         <BalanceCard balance={balance} />
         <DepositCard updateBalance={updateBalance} />
-        <TransferCard />
+        <TransferCard updateBalance={updateBalance} />
         <TransactionsCard balance={balance} />
-        <HistoryCard />
+        <HistoryCard balance={balance} />
       </div>
     </div>
   );

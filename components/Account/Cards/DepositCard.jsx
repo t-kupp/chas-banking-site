@@ -4,13 +4,11 @@ import { Input } from "../../ui/input";
 import { Button } from "../../ui/button";
 import { useState } from "react";
 import { BASE_URL } from "@/lib/baseUrl";
-import { useRouter } from "next/navigation";
 
 export default function DepositCard({ updateBalance }) {
   const [amount, setAmount] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [showCheckmark, setShowCheckmark] = useState(false);
-  const router = useRouter();
 
   function handleKeyDown(e) {
     if (e.key == "." || e.key == "+" || e.key == "-") e.preventDefault();

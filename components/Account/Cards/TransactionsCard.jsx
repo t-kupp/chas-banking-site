@@ -5,8 +5,6 @@ import { BASE_URL } from "@/lib/baseUrl";
 import { ArrowDownLeft, ArrowUpRight } from "lucide-react";
 import formatToSEK from "@/lib/formatToSEK";
 import formatDateToSwedish from "@/lib/formatDateToSwedish";
-import { Separator } from "@/components/ui/separator";
-import capitalize from "@/lib/capitalize";
 
 export default function TransactionsCard({ balance }) {
   const [transactions, setTransactions] = useState([]);
@@ -34,7 +32,6 @@ export default function TransactionsCard({ balance }) {
 
     if (res.status == 200) {
       setTransactions(answer.transactions.reverse());
-      console.log(answer.transactions);
     }
   }
 
@@ -65,7 +62,7 @@ export default function TransactionsCard({ balance }) {
                     )}
 
                     <div>
-                      <p className="mb-1 text-sm">{capitalize(transaction.transactionType)}</p>
+                      <p className="mb-1 text-sm">{isDeposit ? "Deposit" : "Transfer"}</p>
                       <p className="text-muted-foreground text-xs">
                         {formatDateToSwedish(transaction.created)}
                       </p>
