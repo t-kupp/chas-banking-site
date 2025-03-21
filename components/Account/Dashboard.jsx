@@ -16,11 +16,11 @@ export default function Dashboard({ user }) {
   return (
     <div className="flex h-full w-full flex-col gap-8">
       <DashboardHeader user={user} />
-      <div className="grid grid-cols-3 grid-rows-3 gap-8">
+      <div className="grid grid-cols-3 grid-rows-[auto,auto,auto] gap-8">
         <BalanceCard balance={balance} />
         <DepositCard updateBalance={updateBalance} />
         <TransferCard />
-        <TransactionsCard />
+        <TransactionsCard balance={balance} />
         <HistoryCard />
       </div>
     </div>

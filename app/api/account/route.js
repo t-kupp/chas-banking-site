@@ -4,8 +4,6 @@ import query from "@/lib/database";
 export async function POST(req) {
   const { action, session, amount } = await req.json();
 
-  // Action: Get userdata
-
   if (!session) {
     return NextResponse.json({ message: "Missing session." }, { status: 401 });
   }
@@ -22,8 +20,8 @@ export async function POST(req) {
     return NextResponse.json({ message: "Invalid session." }, { status: 401 });
   }
 
+  // Action: Get userdata
   if (action == "getUserData") {
-    // Get user info
     let username = null;
     let amount = null;
 
@@ -40,6 +38,7 @@ export async function POST(req) {
     const user = { username, amount, userId };
     return NextResponse.json({ message: "Got userinfo.", user: user }, { status: 200 });
   }
+
   // Action: Deposit funds
   else if (action == "depositFunds") {
     if (amount <= 0) {
@@ -51,11 +50,35 @@ export async function POST(req) {
       userId,
     ]);
 
+    const accountIdQuery = await query("SELECT id FROM accounts WHERE userId = ?", [userId]);
+    const accountId = accountIdQuery[0].id;
+
+    const transactionQuery = await query(
+      "INSERT INTO transactions (accountId, amount, transactionType, fromAccountId, toAccountId) VALUES (?, ?, ?, ?, ?)",
+      [accountId, amount, "deposit", null, accountId],
+    );
+
     const amountQuery = await query("SELECT amount FROM accounts WHERE userId = ?", [userId]);
 
     const newBalance = amountQuery[0].amount;
     console.log("newBalance", newBalance);
 
     return NextResponse.json({ message: "Added funds. New balance:", newBalance }, { status: 200 });
+  }
+
+  // Action: Get transactions
+  else if (action == "getTransactions") {
+    let transactions = null;
+    try {
+      const transactionsQuery = await query(
+        "SELECT amount, transactionType, created FROM transactions WHERE accountId = ?",
+        [userId],
+      );
+      transactions = transactionsQuery;
+    } catch (error) {
+      console.error(error);
+      return NextResponse.json({ message: "Error getting transaction data." }, { status: 400 });
+    }
+    return NextResponse.json({ message: "Got transaction data.", transactions }, { status: 200 });
   }
 }

@@ -9,9 +9,7 @@ export default function DashboardHeader({ user }) {
     <div className="col-span-3 flex w-full justify-between gap-4">
       <div>
         <h1 className="mb-1 text-2xl font-medium">Overview</h1>
-        <p className="text-muted-foreground text-sm font-light">
-          Welcome back, {capitalize(user.username)}!
-        </p>
+        <p className="text-muted-foreground text-sm">Welcome back, {capitalize(user.username)}!</p>
       </div>
       <div className="flex gap-2">
         <div className="relative">

@@ -8,7 +8,7 @@ export default function TransferCard() {
     <Card>
       <CardHeader>
         <CardTitle>Transfer</CardTitle>
-        <CardDescription>Send money securely in just a few clicks.</CardDescription>
+        <CardDescription>Send money in just a few clicks.</CardDescription>
       </CardHeader>
       {/* <CardContent className={"flex gap-4"}>
         <div className="relative flex items-center">
