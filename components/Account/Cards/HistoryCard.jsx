@@ -65,7 +65,7 @@ export default function HistoryCard({ balance }) {
   console.log(chartData);
 
   return (
-    <Card className={"col-span-2 row-span-2"}>
+    <Card className={"col-span-1 row-span-2 sm:col-span-2"}>
       <CardHeader>
         <CardTitle>Balance History</CardTitle>
         <CardDescription>Track your account's balance over time.</CardDescription>

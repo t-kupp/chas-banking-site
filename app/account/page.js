@@ -43,9 +43,9 @@ export default function Account() {
   }
 
   return (
-    <div className="mt-16 flex w-full p-8">
+    <div className="mt-2 flex w-full p-4 lg:mt-16 lg:p-8">
       <div
-        className={`${!isLoading && "border"} mx-auto my-auto flex w-full max-w-7xl flex-col items-center justify-center rounded-xl p-8`}
+        className={`${!isLoading && "border"} mx-auto my-auto flex w-full max-w-7xl flex-col items-center justify-center rounded-xl p-4 lg:p-8`}
       >
         {isLoading ? (
           <Loader2 className="animate-spin" />

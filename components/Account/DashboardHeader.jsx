@@ -12,7 +12,7 @@ export default function DashboardHeader({ user }) {
         <p className="text-muted-foreground text-sm">Welcome back, {capitalize(user.username)}!</p>
       </div>
       <div className="flex gap-2">
-        <div className="relative">
+        <div className="relative hidden sm:flex">
           <Input placeholder="Search" className={"pr-8"} />
           <Search size={20} className="text-muted-foreground absolute top-2 right-2" />
         </div>
