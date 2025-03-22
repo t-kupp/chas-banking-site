@@ -5,6 +5,7 @@ import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/
 import { LineChart, CartesianGrid, Line, XAxis, YAxis, ReferenceLine } from "recharts";
 
 import formatDateToMonthAndDays from "@/lib/formatDateToMonthAndDays";
+import { ChartLine } from "lucide-react";
 
 export default function HistoryCard({ balance }) {
   const [transactions, setTransactions] = useState([]);
@@ -67,7 +68,9 @@ export default function HistoryCard({ balance }) {
   return (
     <Card className={"col-span-1 row-span-2 sm:col-span-2"}>
       <CardHeader>
-        <CardTitle>Balance History</CardTitle>
+        <CardTitle>
+          <ChartLine size={20} className="text-primary" /> Balance History
+        </CardTitle>
         <CardDescription>Track your account's balance over time.</CardDescription>
       </CardHeader>
       <CardContent className={"px-0"}>

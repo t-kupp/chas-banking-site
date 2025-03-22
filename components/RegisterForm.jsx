@@ -20,8 +20,8 @@ import { LoaderCircle } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
-  username: z.string().min(3, {
-    message: "Username must be at least 3 characters.",
+  username: z.string().min(1, {
+    message: "Username must be at least 1 characters.",
   }),
   password: z.string().min(5, {
     message: "Password must be at least 5 characters.",
@@ -102,6 +102,9 @@ export default function RegisterForm({ handleSubmit, response }) {
                   <FormControl>
                     <Input type="password" placeholder="Enter your password" {...field} />
                   </FormControl>
+                  <FormDescription className={"text-xs"}>
+                    Must be 5 characters or more
+                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
