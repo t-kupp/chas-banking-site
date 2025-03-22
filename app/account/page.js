@@ -43,7 +43,7 @@ export default function Account() {
   }
 
   return (
-    <div className="mt-2 flex w-full p-4 lg:mt-16 lg:p-8">
+    <div className="flex w-full p-4 lg:p-8 2xl:mt-16">
       <div
         className={`${!isLoading && "border"} mx-auto my-auto flex w-full max-w-7xl flex-col items-center justify-center rounded-xl p-4 lg:p-8`}
       >

@@ -1,17 +1,19 @@
 import { NextResponse } from "next/server";
 import query from "@/lib/database";
+import { comparePasswords } from "@/lib/bcrypt";
 
 export async function POST(req) {
   const data = await req.json();
   const { username, password } = data;
 
   // Find user in users and compare password for login request
-  const userQuery = await query(
-    "SELECT username, password FROM users WHERE username = ? AND password = ?",
-    [username, password],
-  );
+  const userQuery = await query("SELECT username, password FROM users WHERE username = ?", [
+    username,
+  ]);
 
-  if (userQuery.length == 0) {
+  const passwordsMatch = await comparePasswords(password, userQuery[0].password);
+
+  if (!passwordsMatch) {
     return NextResponse.json({ message: "Invalid credentials." }, { status: 401 });
   }
 

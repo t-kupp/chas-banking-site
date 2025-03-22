@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import query from "@/lib/database";
+import { hashPassword } from "@/lib/bcrypt";
 
 export async function POST(req) {
   const data = await req.json();
@@ -21,7 +22,7 @@ export async function POST(req) {
   try {
     await query("INSERT INTO users (username, password) VALUES (?, ?)", [
       newUser.username,
-      newUser.password,
+      await hashPassword(newUser.password),
     ]);
     console.log("New user added.");
   } catch (error) {
