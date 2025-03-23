@@ -40,7 +40,6 @@ export default function TransferCard({ updateBalance }) {
       setTimeout(() => {
         updateBalance(answer.newBalance);
         setAmount("");
-        console.log(answer);
         setIsLoading(false);
         setShowCheckmark(true);
 

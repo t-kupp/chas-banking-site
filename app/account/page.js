@@ -14,7 +14,6 @@ export default function Account() {
 
   useEffect(() => {
     getUserData();
-    console.log("userinfo called");
   }, []);
 
   async function getUserData() {
@@ -27,8 +26,6 @@ export default function Account() {
     });
 
     const answer = await res.json();
-
-    console.log(answer);
 
     if (res.status != 200) {
       setIsSessionValid(false);

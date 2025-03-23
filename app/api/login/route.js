@@ -7,16 +7,16 @@ export async function POST(req) {
   const { username, password } = data;
 
   // Find user in users and compare password for login request
-  const userQuery = await query("SELECT username, password FROM users WHERE username = ?", [
-    username,
-  ]);
+  const userQuery = await query("SELECT id, password FROM users WHERE username = $1", [username]);
 
-  let passwordsMatch = false;
-  let storedPassword = userQuery[0]?.password;
-
-  if (storedPassword) {
-    passwordsMatch = await comparePasswords(password, storedPassword);
+  if (userQuery.length === 0) {
+    return NextResponse.json({ message: "Invalid credentials." }, { status: 401 });
   }
+
+  const { id: userId, password: storedPassword } = userQuery[0];
+
+  // Compare hashed password
+  const passwordsMatch = await comparePasswords(password, storedPassword);
 
   if (!passwordsMatch) {
     return NextResponse.json({ message: "Invalid credentials." }, { status: 401 });
@@ -24,10 +24,9 @@ export async function POST(req) {
 
   // Add session to sessions
   const token = crypto.randomUUID();
-  const userId = await query("SELECT id FROM users WHERE username = ?", [username]);
 
   try {
-    await query("INSERT INTO sessions (userId, token) VALUES (?, ?)", [userId[0].id, token]);
+    await query("INSERT INTO sessions (user_id, token) VALUES ($1, $2)", [userId, token]);
   } catch (error) {
     console.error(error);
     return NextResponse.json(
@@ -37,7 +36,7 @@ export async function POST(req) {
   }
 
   return NextResponse.json(
-    { message: "Session added.", session: { userId: userId[0].id, token: token } },
+    { message: "Session added.", session: { userId, token } },
     { status: 201 },
   );
 }

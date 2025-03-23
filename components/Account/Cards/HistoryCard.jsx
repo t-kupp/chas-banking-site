@@ -51,8 +51,11 @@ export default function HistoryCard({ balance }) {
 
     let balance = 0;
     let newChartData = sortedTransactions.map((transaction) => {
-      balance +=
-        transaction.transactionType === "deposit" ? transaction.amount : -transaction.amount;
+      balance =
+        parseInt(balance) +
+        (transaction.transaction_type === "deposit"
+          ? parseInt(transaction.amount)
+          : -parseInt(transaction.amount));
 
       return {
         kr: balance,
@@ -62,8 +65,6 @@ export default function HistoryCard({ balance }) {
 
     setChartData(newChartData);
   }
-
-  console.log(chartData);
 
   return (
     <Card className={"col-span-1 row-span-2 sm:col-span-2"}>
@@ -90,7 +91,26 @@ export default function HistoryCard({ balance }) {
               tickLine={false}
               axisLine={false}
               tickMargin={8}
-              tickFormatter={(value) => value + " kr"}
+              tickFormatter={(value) => {
+                const isNegative = value < 0;
+                const absoluteValue = Math.abs(value);
+
+                let formattedValue;
+
+                if (absoluteValue >= 1_000_000_000) {
+                  formattedValue = (absoluteValue / 1_000_000_000).toFixed(1) + "B kr"; // Billions
+                } else if (absoluteValue >= 1_000_000) {
+                  formattedValue = (absoluteValue / 1_000_000).toFixed(1) + "M kr"; // Millions
+                } else if (absoluteValue >= 1_000) {
+                  formattedValue = (absoluteValue / 1_000).toFixed(1) + "t kr"; // Thousands
+                } else {
+                  formattedValue = absoluteValue + " kr"; // Less than 1,000, no abbreviation
+                }
+
+                // If the number is negative, add a minus sign
+                return isNegative ? `-${formattedValue}` : formattedValue;
+              }}
+              width={80}
             />
             <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
             <Line

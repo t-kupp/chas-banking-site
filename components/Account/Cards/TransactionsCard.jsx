@@ -46,7 +46,7 @@ export default function TransactionsCard({ balance }) {
       <CardContent className={"max-h-[235px]"}>
         <ScrollArea className={"h-full"}>
           {transactions.map((transaction, index) => {
-            const isDeposit = transaction.transactionType == "deposit";
+            const isDeposit = transaction.transaction_type == "deposit";
             return (
               <div className="my-6" key={index}>
                 <div className="flex items-center justify-between">
