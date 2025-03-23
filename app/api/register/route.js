@@ -8,10 +8,12 @@ export async function POST(req) {
 
   // Check for existing user
   const check = await query(
-    "SELECT EXISTS(SELECT 1 FROM users WHERE username = $1) AS userExists",
+    "SELECT EXISTS(SELECT 1 FROM users WHERE username = $1) AS user_exists",
     [username],
   );
-  const userExists = check[0].userExists;
+  console.log(check);
+
+  const userExists = check[0].user_exists;
 
   if (userExists) {
     console.log("Tried to add user, but user already exists!");
