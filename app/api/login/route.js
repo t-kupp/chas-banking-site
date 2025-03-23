@@ -11,7 +11,12 @@ export async function POST(req) {
     username,
   ]);
 
-  const passwordsMatch = await comparePasswords(password, userQuery[0].password);
+  let passwordsMatch = false;
+  let storedPassword = userQuery[0]?.password;
+
+  if (storedPassword) {
+    passwordsMatch = await comparePasswords(password, storedPassword);
+  }
 
   if (!passwordsMatch) {
     return NextResponse.json({ message: "Invalid credentials." }, { status: 401 });
