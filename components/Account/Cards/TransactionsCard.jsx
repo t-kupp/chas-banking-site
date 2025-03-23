@@ -2,7 +2,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../../ui/card";
 import { useEffect, useState } from "react";
 import { BASE_URL } from "@/lib/baseUrl";
-import { ArrowDownLeft, ArrowUpRight } from "lucide-react";
+import { ArrowDownLeft, ArrowUpRight, HandCoins } from "lucide-react";
 import formatToSEK from "@/lib/formatToSEK";
 import formatDateToSwedish from "@/lib/formatDateToSwedish";
 
@@ -38,7 +38,9 @@ export default function TransactionsCard({ balance }) {
   return (
     <Card className={"row-span-2"}>
       <CardHeader>
-        <CardTitle>Transactions</CardTitle>
+        <CardTitle>
+          <HandCoins size={20} className="text-primary" /> Transactions
+        </CardTitle>
         <CardDescription>Stay updated on your account activity.</CardDescription>
       </CardHeader>
       <CardContent className={"max-h-[235px]"}>

@@ -1,4 +1,4 @@
-import { ArrowRight, Check, Loader2 } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Check, Loader2 } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../../ui/card";
 import { Input } from "../../ui/input";
 import { Button } from "../../ui/button";
@@ -57,10 +57,12 @@ export default function TransferCard({ updateBalance }) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Transfer</CardTitle>
+        <CardTitle>
+          <ArrowUpRight size={20} className="text-primary" /> Transfer
+        </CardTitle>
         <CardDescription>Send money in just a few clicks.</CardDescription>
       </CardHeader>
-      <CardContent className={"flex gap-4"}>
+      <CardContent className={"mt-auto flex gap-4"}>
         <div className="relative flex items-center">
           <p className="text-muted-foreground absolute right-3">kr</p>
           <Input
