@@ -14,9 +14,11 @@ import {
 } from "@/components/ui/sheet";
 import { Separator } from "../ui/separator";
 import { useState } from "react";
+import { useLogin } from "@/context/loginContext";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const { isLoggedIn } = useLogin();
 
   return (
     <div className="bg-muted sticky top-0 z-50 border-b px-4 py-4 lg:px-8">
@@ -44,9 +46,15 @@ export default function Header() {
           <Button variant={"link"}>
             <Search /> Search
           </Button>
-          <Link href={"/login"}>
+          <Link href={isLoggedIn ? "/account" : "/login"}>
             <Button className={"ml-4"}>
-              <Lock /> Login
+              {isLoggedIn ? (
+                "Account"
+              ) : (
+                <>
+                  <Lock /> Login
+                </>
+              )}
             </Button>
           </Link>
         </div>

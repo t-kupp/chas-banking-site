@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/components/ui/theme-provider";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
 import { usePathname } from "next/navigation";
+import LoginProvider from "@/context/loginContext";
 
 // export const metadata = {
 //   title: "Big Stacks Bank",
@@ -22,9 +23,11 @@ export default function RootLayout({ children }) {
           enableSystem
           disableTransitionOnChange
         >
-          <Header />
-          {children}
-          <Footer />
+          <LoginProvider>
+            <Header />
+            {children}
+            <Footer />
+          </LoginProvider>
         </ThemeProvider>
       </body>
     </html>
