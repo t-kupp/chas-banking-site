@@ -6,11 +6,13 @@ import { Loader2 } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { BASE_URL } from "@/lib/baseUrl";
+import { useLogin } from "@/context/loginContext";
 
 export default function Account() {
   const [user, setUser] = useState(null);
   const [isSessionValid, setIsSessionValid] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const { setIsLoggedIn } = useLogin();
 
   useEffect(() => {
     getUserData();
@@ -29,6 +31,8 @@ export default function Account() {
 
     if (res.status != 200) {
       setIsSessionValid(false);
+      localStorage.removeItem("session");
+      setIsLoggedIn(false);
     }
 
     if (res.status == 200) {
