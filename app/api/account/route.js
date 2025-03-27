@@ -45,7 +45,7 @@ export async function POST(req) {
     }
 
     try {
-      await query("BEGIN"); // Start transaction
+      await query("BEGIN");
 
       await query("UPDATE accounts SET amount = amount + $1 WHERE user_id = $2", [amount, userId]);
 
@@ -60,11 +60,11 @@ export async function POST(req) {
       const amountQuery = await query("SELECT amount FROM accounts WHERE user_id = $1", [userId]);
       const newBalance = amountQuery[0].amount;
 
-      await query("COMMIT"); // Commit transaction
+      await query("COMMIT");
 
       return NextResponse.json({ message: "Added funds.", newBalance }, { status: 200 });
     } catch (error) {
-      await query("ROLLBACK"); // Rollback on failure
+      await query("ROLLBACK");
       console.error(error);
       return NextResponse.json({ message: "Deposit failed." }, { status: 500 });
     }
@@ -77,7 +77,7 @@ export async function POST(req) {
     }
 
     try {
-      await query("BEGIN"); // Start transaction
+      await query("BEGIN");
 
       await query("UPDATE accounts SET amount = amount - $1 WHERE user_id = $2", [amount, userId]);
 
@@ -92,11 +92,11 @@ export async function POST(req) {
       const amountQuery = await query("SELECT amount FROM accounts WHERE user_id = $1", [userId]);
       const newBalance = amountQuery[0].amount;
 
-      await query("COMMIT"); // Commit transaction
+      await query("COMMIT");
 
       return NextResponse.json({ message: "Transferred funds.", newBalance }, { status: 200 });
     } catch (error) {
-      await query("ROLLBACK"); // Rollback on failure
+      await query("ROLLBACK");
       console.error(error);
       return NextResponse.json({ message: "Transfer failed." }, { status: 500 });
     }
