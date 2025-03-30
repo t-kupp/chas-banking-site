@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { Button } from "../ui/button";
 import Logo from "./Logo";
-import { Search, MapPin, Phone, Lock, Menu } from "lucide-react";
+import { Search, MapPin, Phone, Lock, Menu, User } from "lucide-react";
 import {
   Sheet,
   SheetContent,
@@ -49,7 +49,9 @@ export default function Header() {
           <Link href={isLoggedIn ? "/account" : "/login"}>
             <Button className={"ml-4"}>
               {isLoggedIn ? (
-                "Account"
+                <>
+                  <User /> Account
+                </>
               ) : (
                 <>
                   <Lock /> Login
@@ -69,9 +71,17 @@ export default function Header() {
               <SheetHeader>
                 <SheetTitle />
               </SheetHeader>
-              <Link href={"/login"} className="w-full">
-                <Button className={"w-full"} onClick={() => setIsOpen(false)}>
-                  <Lock /> Login
+              <Link href={isLoggedIn ? "/account" : "/login"} onClick={() => setIsOpen(false)}>
+                <Button className={"ml-4"}>
+                  {isLoggedIn ? (
+                    <>
+                      <User /> Account
+                    </>
+                  ) : (
+                    <>
+                      <Lock /> Login
+                    </>
+                  )}
                 </Button>
               </Link>
               <Separator />
