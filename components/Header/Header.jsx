@@ -21,7 +21,7 @@ export default function Header() {
   const { isLoggedIn } = useLogin();
 
   return (
-    <div className="bg-muted sticky top-0 z-50 border-b px-4 py-4 lg:px-8">
+    <header className="bg-muted sticky top-0 z-50 border-b px-4 py-4 lg:px-8">
       <div className="flex w-full items-center justify-between">
         <div className="flex items-center">
           <Link href={"/"}>
@@ -105,6 +105,6 @@ export default function Header() {
           </Sheet>
         </div>
       </div>
-    </div>
+    </header>
   );
 }
