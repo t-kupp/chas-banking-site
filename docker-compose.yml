@@ -1,9 +1,10 @@
-version: "3.8"
-
 services:
   chas-banking-app:
-    image: chas-banking-app # The name of your built Docker image
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: chas-banking-app
     ports:
       - "3000:3000"
     env_file:
-      - .env # Load environment variables from .env file
+      - .env
