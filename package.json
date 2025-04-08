@@ -9,8 +9,8 @@
     "lint": "next lint",
     "transfer-win": "wsl rsync -avz -e \"ssh -i ~/aws-server.pem\" --exclude=node_modules --exclude=.next ../chas-banking-site ubuntu@ec2-13-60-105-124.eu-north-1.compute.amazonaws.com:/home/ubuntu",
     "transfer-mac": "rsync -avz -e \"ssh -i ~/aws-server.pem\" --exclude=node_modules --exclude=.next ../chas-banking-site ubuntu@ec2-13-60-105-124.eu-north-1.compute.amazonaws.com:/home/ubuntu",
-    "test": "jest",
-    "test:watch": "jest --watch"
+    "test": "jest --watchAll=false --passWithNoTests",
+    "test:ci": "jest --ci --runInBand"
   },
   "dependencies": {
     "@hookform/resolvers": "^4.1.3",
