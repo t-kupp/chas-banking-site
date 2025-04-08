@@ -2,7 +2,7 @@ name: Deploy to EC2
 on:
   push:
     branches:
-      - main
+      - master
 jobs:
   test:
     name: Test with React Testing Library v2
