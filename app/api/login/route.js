@@ -7,7 +7,9 @@ export async function POST(req) {
   const { username, password } = data;
 
   // Find user in users and compare password for login request
-  const userQuery = await query("SELECT id, password FROM users WHERE username = $1", [username]);
+  const userQuery = await query("SELECT id, password FROM users WHERE username ILIKE $1", [
+    username,
+  ]);
 
   if (userQuery.length === 0) {
     return NextResponse.json({ message: "Invalid credentials." }, { status: 401 });
