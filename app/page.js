@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -28,18 +29,19 @@ export default function Home() {
 
       <section className="mb-16 grid max-w-5xl grid-cols-1 gap-8 lg:my-16 lg:grid-cols-2">
         <div className="flex w-full flex-col items-center justify-center">
-          <h1 className="text-3xl font-bold sm:text-4xl">
-            How to Build a Budget That Actually Works
-          </h1>
+          <h1 className="text-3xl font-bold sm:text-4xl">Smart Banking, Bigger Stacks!</h1>
           <p className="text-muted-foreground mt-4 text-base opacity-90">
-            Creating a budget can feel overwhelming, but it doesn’t have to be. Discover
-            easy-to-follow steps to build a budget that works for you, and how to stick to it
-            without feeling restricted.
+            Welcome to Big Stacks—where managing money is simple, secure, and maybe even a little
+            fun. Whether you're saving for a rainy day or planning your next big move, we’ve got the
+            tools to help you stack up success. Why settle for loose change when you could have
+            stacks?
           </p>
 
-          <Button variant={"outline"} className={"mt-6 self-start"} size={"lg"}>
-            Start budgeting
-          </Button>
+          <Link href={"/login"} className={"mt-6 self-start"}>
+            <Button variant={"default"} size={"lg"}>
+              Start stacking!
+            </Button>
+          </Link>
         </div>
         <Image
           width={1000}
